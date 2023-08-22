@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class SimuladorSemaforo extends JFrame {
     private Images img;
 
-    private JLabel semaforoLabel, pedestreLabel;
+    private JLabel semaforoLabel, pedestreLabel, semaforo2Label;
 
     ImageIcon semaforoVerde = new ImageIcon("assets/semaforo_verde.png");
     ImageIcon semaforoVermelho = new ImageIcon("assets/semaforo_vermelho.png");
@@ -34,6 +34,11 @@ public class SimuladorSemaforo extends JFrame {
         semaforoLabel.setIcon(traficRed);
         pedestreLabel = new JLabel();
         pedestreLabel.setIcon(pedestreVerde);
+        pedestreLabel.setIcon(pedestreVerde);
+
+
+        semaforo2Label = new JLabel();
+        semaforo2Label.setIcon(traficGreen);
 
         JButton iniciarButton = new JButton("Iniciar");
         iniciarButton.setSize(50,50);
@@ -45,18 +50,17 @@ public class SimuladorSemaforo extends JFrame {
         });
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setLayout(new FlowLayout());
+
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.add(semaforoLabel, BorderLayout.WEST);
-        panel.add(pedestreLabel, BorderLayout.EAST);
+
+        panel.add(semaforo2Label,BorderLayout.CENTER);
         panel.add(iniciarButton, BorderLayout.SOUTH);
-//        JPanel painel = new JPanel();
-//        painel.add(pedestreLabel);
+
         add(panel);
-//        add(painel, FlowLayout.CENTER);
-//        add(iniciarButton, FlowLayout.TRAILING);
+
 
         pack();
         setLocationRelativeTo(null);
@@ -73,15 +77,20 @@ public class SimuladorSemaforo extends JFrame {
                             case 0:
                                 semaforoLabel.setIcon(traficRed);
                                 pedestreLabel.setIcon(traficPersonRed);
+                                semaforo2Label.setIcon(traficGreen);
                                 Thread.sleep(5000);
                                 break;
                             case 1:
-                                semaforoLabel.setIcon(traficGreen);
+                                semaforoLabel.setIcon(traficRed);
+                                semaforo2Label.setIcon(traficRed);
+                                semaforo2Label.setIcon(traficYellow);
                                 pedestreLabel.setIcon(traficPersonGreen);
                                 Thread.sleep(7000);
                                 break;
                             case 2:
-                                semaforoLabel.setIcon(traficYellow);
+                                semaforoLabel.setIcon(traficRed);
+                                semaforoLabel.setIcon(traficGreen);
+                                semaforo2Label.setIcon(traficRed);
                                 Thread.sleep(2000);
                                 break;
                         }
@@ -89,7 +98,10 @@ public class SimuladorSemaforo extends JFrame {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+
                 }
+
+
             }
         });
         thread.start();
